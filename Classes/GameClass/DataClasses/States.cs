@@ -31,7 +31,7 @@ namespace WRPG.Classes.GameClass.DataClasses
             stats = new List<Stat>();
         }
         public States() { Name = "None"; stats = new(); }
-        public Stat GetStat(string source) => stats.Find((e) => e.Source == source);
+        public Stat GetStat(string source) => stats.Find((e) => e.Source == source)!;
         public void AddStat(Stat stat)
         {
             if (stat.Name != Name) { throw new Exception("Error add stat: Name stat not equals"); }

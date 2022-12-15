@@ -8,7 +8,6 @@ namespace WRPG.Classes.GameClass.DataClasses
     {
         public int CurrentLevel { get { return level; } init { level = value; } }
         private int level;
-
         public float CurrentXp { get { return xp; } init { xp = value; } }
         private float xp;
 

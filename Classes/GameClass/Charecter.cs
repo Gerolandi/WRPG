@@ -26,9 +26,9 @@ namespace WRPG.Classes
             {
                 if (i.Name == name)
                 {
-                    var tmp = (States)i.GetValue(this);                    
+                    var tmp = (States)i.GetValue(this)!;                    
                     tmp.AddStat(new Stat(name, value,source));
-                    StatChange.Invoke(name);
+                    StatChange!.Invoke(name);
                 }
             }
         }

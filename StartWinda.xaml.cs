@@ -24,7 +24,7 @@ namespace WRPG
     public partial class StartWinda : Window
     {
         public string Namenka { get; set; } = "Niet";
-        public Charecter chare = new();
+        public Charecter? chare = new();
         public StartWinda()
         {
             InitializeComponent();
@@ -60,8 +60,8 @@ namespace WRPG
         private void Exit_Event(object sender, RoutedEventArgs e) { }
         private void Charecter_Select(object sender, RoutedEventArgs e)
         {
-            var tmp = sender as Button;
-            if (tmp.Content == "Create charecter")
+            var tmp = (Button)sender;
+            if (tmp.Content.ToString() == "Create charecter")
             {                
                 var tmpek = new CreateCharecter();
                 tmpek.CharecterCreated += CreateOver;
@@ -76,7 +76,7 @@ namespace WRPG
             else
             {
                 chare = JsonSerializer.Deserialize<Charecter>(File.ReadAllText(@"D:\Formy\WRPG\WRPG\Assets\Saves\Charecter" + tmp.Name[tmp.Name.Length - 1] + ".json"));
-                new MainWindow(chare).Show();
+                new MainWindow(chare!).Show();
 
                 this.Close();
             }

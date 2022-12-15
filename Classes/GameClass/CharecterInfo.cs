@@ -28,7 +28,7 @@ namespace WRPG.Classes
             foreach ( var prop in tmp )
             {
                 if(prop.PropertyType.Name != "States") continue;
-                output += $"\n   {prop.Name}: {(prop.GetValue(Charecter) as States).SumValue}";
+                output += $"\n   {prop.Name}: {(prop.GetValue(Charecter) as States)!.SumValue}";
             }
             return output;
         }
