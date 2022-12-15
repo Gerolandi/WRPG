@@ -1,0 +1,8 @@
+﻿<Application x:Class="WRPG.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WRPG">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

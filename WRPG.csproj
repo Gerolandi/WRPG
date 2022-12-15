@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="1.PNG" />
+    <None Remove="empty.png" />
+    <None Remove="progresbar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Saves\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="1.PNG" />
+    <Resource Include="empty.png" />
+    <Resource Include="progresbar.png" />
+  </ItemGroup>
+
+</Project>

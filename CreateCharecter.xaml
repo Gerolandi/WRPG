@@ -1,0 +1,62 @@
+﻿<Window x:Class="WRPG.CreateCharecter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WRPG"
+        mc:Ignorable="d"
+        Title="CreateCharecter" Height="450" Width="300"
+        MinHeight="450"
+        MinWidth="300">                  
+    <Grid>        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Creating charecter" Grid.Column="1" HorizontalAlignment="Center" FontSize="20"/>
+        <TextBlock Text="Name:" Grid.Row="1" Grid.Column="1" Margin="5" FontSize="15"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,25,5,10" VerticalAlignment="Top" MinWidth="150" Name="NameBox"/>
+        
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Race:" FontSize="15" Margin="5,3,5,3"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Margin="5,22,5,5" Name="RaceBox" SelectionChanged="RaceBox_SelectionChanged">
+            <ComboBoxItem Content="Human"/>
+            <ComboBoxItem Content="Orc"/>
+            <ComboBoxItem Content="Elf"/>
+        </ComboBox>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Class:" FontSize="15" Margin="5,3,5,3"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" Margin="5,22,5,5" Name="ClassBox" SelectionChanged="ClassBox_SelectionChanged">
+            <ComboBoxItem Content="Mage"/>
+            <ComboBoxItem Content="Warrior"/>
+            <ComboBoxItem Content="Archer"/>
+        </ComboBox>
+        <StackPanel Grid.Row="4" Grid.Column="1" Margin="5,3,5,3">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="15"/>
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="HP: "/>
+                <TextBlock x:Name="hp"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Damage: "/>
+                <TextBlock x:Name="damage"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Defence: "/>
+                <TextBlock x:Name="defence"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Content="Create" Grid.Column="1" Grid.Row="5" Margin="1" Click="Create_Finish"/>
+    </Grid>
+</Window>

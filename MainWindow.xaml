@@ -1,0 +1,31 @@
+﻿<Window x:Class="WRPG.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:beha="clr-namespace:HelpTool"
+        xmlns:local="clr-namespace:WRPG"
+        mc:Ignorable="d"
+        Title="Start Menu" Height="536" Width="953">
+    <Grid>
+        <Grid Grid.Column="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Content="Town" FontSize="40" Click="Location_Select"/>
+            <Button Grid.Row="1" Content="Forest" FontSize="40" Click="Location_Select"/>
+            <Button Grid.Row="2" Content="Dungeon" FontSize="40" Click="Location_Select"/>
+            <Button Grid.Row="3" Content="Charecter" FontSize="40" Click="Location_Select"/>
+        </Grid>
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" beha:DisableNavigation.Disable="True"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+    </Grid>
+</Window>

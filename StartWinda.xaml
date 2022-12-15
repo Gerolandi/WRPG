@@ -1,0 +1,36 @@
+﻿<Window x:Class="WRPG.StartWinda"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WRPG"
+        mc:Ignorable="d"
+        Title="StartWinda" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="1" Grid.Row="1" Margin="5" Content="Start" FontSize="40" Click="Start_Event"/>
+        <Button Grid.Column="1" Grid.Row="2" Margin="5" Content="Setting" FontSize="40" Click="Setting_Event"/>
+        <Button Grid.Column="1" Grid.Row="3" Margin="5" Content="Exit" FontSize="40" Click="Exit_Event"/>
+        <Grid Grid.Row="1" Grid.Column="2" Name="CharGrid" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Margin="3" Name="Save1" Click="Charecter_Select"/>
+            <Button Grid.Row="1" Margin="3" Name="Save2" Click="Charecter_Select"/>
+            <Button Grid.Row="2" Margin="3" Name="Save3" Click="Charecter_Select"/>
+        </Grid>
+    </Grid>
+</Window>
