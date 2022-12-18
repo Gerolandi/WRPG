@@ -23,7 +23,6 @@ namespace WRPG
     /// </summary>
     public partial class StartWinda : Window
     {
-        public string Namenka { get; set; } = "Niet";
         public Charecter? chare = new();
         public StartWinda()
         {

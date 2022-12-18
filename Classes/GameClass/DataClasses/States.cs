@@ -12,7 +12,10 @@ namespace WRPG.Classes.GameClass.DataClasses
     public class States
     {
         public string Name { get; set; }
+        [JsonIgnore]
         public float SumValue { get { return ReStat(); } }
+        public int Level { get; set; }
+        public float LevelMultiplier { get; set; }
         public List<Stat> stats { get; set; }
 
         private float ReStat()
@@ -22,12 +25,15 @@ namespace WRPG.Classes.GameClass.DataClasses
             {
                 tmp += i.Value;
             }
+            tmp = tmp * (1+(LevelMultiplier * Level));
             return tmp;
         }
 
-        public States(string name)
+        public States(string name,float levelScale,int level)
         {
             Name = name;
+            LevelMultiplier = levelScale;
+            this.Level = level;
             stats = new List<Stat>();
         }
         public States() { Name = "None"; stats = new(); }

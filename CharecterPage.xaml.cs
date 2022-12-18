@@ -24,26 +24,29 @@ namespace WRPG
     {
         Inventory<Image> inv = new(new Image() { Source = new BitmapImage(new Uri("pack://application:,,,/empty.png")) },18);
         List<Image> images = new List<Image>();
-        CharecterInfo info;
+        public CharecterInfo info { get; set; }
+        //public Charecter Charecter { get; set; }
         public CharecterPage(Charecter charecter)
         {
             InitializeComponent();
-            info = new(charecter);
-            info.Charecter.StatChange += (string stat) => CharecterInformation.Text = info.GetAllInfo();
-            CharecterInformation.Text = info.GetAllInfo();
-            MessageBox.Show(info.Charecter.Info());
+            info = new(ref charecter);
+            DataContext = info;
+            //info.Charecter.StatChange += (string stat) => CharecterInformation.Text = info.GetAllInfo();
+            //CharecterInformation.Text = info.GetAllInfo();
+            ////MessageBox.Show(info.Charecter.Info());
             InventoryCellGenerete();
-            LevelConfigure();   
-            Test.Content = new EntityBar(info.Charecter);
+            //LevelConfigure();
+            //info.Charecter.ReStat();
+            //Test.Content = new EntityBar(info.Charecter);
         }
 
         private void LevelConfigure()
         {
-            LevelNumber.Text = info.Charecter.Level.CurrentLevel.ToString();
-            LevelBar.Minimum = info.Charecter.Level.XpForPastLevel;
-            LevelBar.Maximum = info.Charecter.Level.XpForNewLevel;
-            LevelBar.Value = info.Charecter.Level.CurrentXp;
-            LevelCount.Text = info.Charecter.Level.CurrentXp + "/" + info.Charecter.Level.XpForNewLevel;
+            //LevelNumber.Text = info.Charecter.Level.CurrentLevel.ToString();
+            //LevelBar.Minimum = info.Charecter.Level.XpForPastLevel;
+            //LevelBar.Maximum = info.Charecter.Level.XpForNewLevel;
+            //LevelBar.Value = info.Charecter.Level.CurrentXp;
+            //LevelCount.Text = info.Charecter.Level.CurrentXp + "/" + info.Charecter.Level.XpForNewLevel;
                 
             
         }
@@ -64,8 +67,8 @@ namespace WRPG
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            info.Charecter.Level.XdAdd(10);
-            LevelConfigure();
+            info.charecter.Level.XdAdd(10);
+            //LevelConfigure();
             //if (((Button)sender).Content.ToString() == "Add")a
             //{
             //    inv.Put("pack://application:,,,/1.PNG");

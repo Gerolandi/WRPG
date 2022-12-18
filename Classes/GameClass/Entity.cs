@@ -22,9 +22,9 @@ namespace WRPG.Classes.GameClass
         {
             this.name = name;
             Level = new(1,0);
-            Hp = new("Hp");
-            Damage = new("Damage");
-            Defence = new("Defence");
+            Hp = new("Hp",0.5f,1);
+            Damage = new("Damage",0.2f,1);
+            Defence = new("Defence",03f,1);
         }
     }
 }

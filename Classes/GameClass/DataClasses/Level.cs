@@ -6,6 +6,8 @@ namespace WRPG.Classes.GameClass.DataClasses
 {
     public class Level
     {
+        public event Action XpValueChanged;
+
         public int CurrentLevel { get { return level; } init { level = value; } }
         private int level;
         public float CurrentXp { get { return xp; } init { xp = value; } }
@@ -15,6 +17,8 @@ namespace WRPG.Classes.GameClass.DataClasses
         public float XpForPastLevel { get { return NextLevel(1); } }
         [JsonIgnore]
         public float XpForNewLevel { get { return NextLevel(); } }
+        [JsonIgnore]
+        public string GetLevelRelation { get { return $"{CurrentXp}/{XpForNewLevel}"; } }
         public Level(int level,float xp)
         {
             this.level = level;
@@ -33,6 +37,7 @@ namespace WRPG.Classes.GameClass.DataClasses
             if (value <= 0) return;
             xp = xp + value;
             CheckForNewLevel();
+            XpValueChanged.Invoke();
 
         }
         private void CheckForNewLevel()

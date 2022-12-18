@@ -34,17 +34,16 @@
             <Image Grid.Column="1" Grid.Row="2"  Source="empty.png" Margin="3"/>
             <Image Grid.Column="2" Grid.Row="1"  Source="empty.png" Margin="3"/>
         </Grid>
-         
-        <ScrollViewer Grid.Column="1">
+
+        <ScrollViewer Grid.Row="1">
             <WrapPanel Name="inventory">
             </WrapPanel>
         </ScrollViewer>
-        <Grid Grid.Row="1">            
+        <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="CharecterInformation" FontSize="20" Grid.Row="1"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -53,9 +52,44 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Name="LevelNumber" Grid.Row="1" Text="10" Background="#FFFFD200" TextAlignment="Center" />
-                <ProgressBar Name="LevelBar" Minimum="0" Maximum="100" Value="10" Foreground="#FFE6FF00" BorderBrush="#FF232020" Background="#FF504848" Grid.Row="1" Margin="5,2,5,2" Grid.Column="1"/>
-                <TextBlock Name="LevelCount" Text="10/100" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Foreground="Red" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Name="LevelNumber" Grid.Row="1" Background="#FFFFD200" TextAlignment="Center" Text="{Binding Level.CurrentLevel, Mode=TwoWay}"/>
+                <ProgressBar Name="LevelBar" Minimum="{Binding Level.XpForPastLevel, Mode=OneWay}" Maximum="{Binding Level.XpForNewLevel, Mode=OneWay}" Value="{Binding Level.CurrentXp}" Foreground="#FFE6FF00" BorderBrush="#FF232020" Background="#FF504848" Grid.Row="1" Margin="5,2,5,2" Grid.Column="1"/>
+                <TextBlock Name="LevelCount" Text="{Binding Level.GetLevelRelation, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Foreground="Red" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="20"/>
+                    </Style>                    
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Name" Grid.Row="0"/>
+                <TextBlock Text="{Binding Name, Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="Race" Grid.Row="1"/>
+                <TextBlock Text="{Binding Race, Mode=OneWay}" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="Class" Grid.Row="2"/>
+                <TextBlock Text="{Binding Class, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="Stats:" Grid.Row="3"/>
+                <TextBlock Text="   Hp: " Grid.Row="4"/>
+                <TextBlock Text="{Binding Hp.SumValue, Mode=OneWay}" Grid.Row="4" Grid.Column="1"/>
+                <TextBlock Text="   Damage: " Grid.Row="5"/>
+                <TextBlock Text="{Binding Damage.SumValue, Mode=OneWay}" Grid.Row="5" Grid.Column="1"/>
+                <TextBlock Text="   Defence: " Grid.Row="6"/>
+                <TextBlock Text="{Binding Defence.SumValue, Mode=OneWay}" Grid.Row="6" Grid.Column="1"/>
             </Grid>
         </Grid>
         <Frame x:Name="Test" Grid.Row="1" Grid.Column="1"/>

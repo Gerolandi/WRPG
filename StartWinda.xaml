@@ -19,6 +19,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Namenka, Mode=TwoWay}"/>
         <Button Grid.Column="1" Grid.Row="1" Margin="5" Content="Start" FontSize="40" Click="Start_Event"/>
         <Button Grid.Column="1" Grid.Row="2" Margin="5" Content="Setting" FontSize="40" Click="Setting_Event"/>
         <Button Grid.Column="1" Grid.Row="3" Margin="5" Content="Exit" FontSize="40" Click="Exit_Event"/>

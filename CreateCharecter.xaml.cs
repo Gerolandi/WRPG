@@ -22,9 +22,9 @@ namespace WRPG
     public partial class CreateCharecter : Window
     {
         public event Action<Charecter> CharecterCreated;
-        States Hp = new("Hp");
-        States Damage = new("Damage");
-        States Defence = new("Defence");
+        States Hp = new("Hp",0f,1);
+        States Damage = new("Damage",0f,1);
+        States Defence = new("Defence",0f,1);
         public CreateCharecter()
         {
             InitializeComponent();

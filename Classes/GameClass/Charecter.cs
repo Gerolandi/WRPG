@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using WRPG.Classes.GameClass.DataClasses;
 
 namespace WRPG.Classes
@@ -17,6 +18,18 @@ namespace WRPG.Classes
         {
             Race = race;
             Class = @class;
+        }
+        public void ReStat()
+        {
+            Type type = this.GetType();
+            foreach (var i in type.GetProperties())
+            {
+                if (i.PropertyType.Name == "States")
+                {
+                    var tmp = (States)i.GetValue(this)!;
+                    tmp.Level = Level.CurrentLevel;
+                }
+            }
         }
         public Charecter() : base("None") {Race = Class = "None"; }
         public void AddStat(string name, float value,string source)
