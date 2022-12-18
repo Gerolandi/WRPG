@@ -7,6 +7,7 @@ namespace WRPG.Classes.GameClass.DataClasses
     public class Level
     {
         public event Action XpValueChanged;
+        public event Action<int> LevelChanged;
 
         public int CurrentLevel { get { return level; } init { level = value; } }
         private int level;
@@ -42,7 +43,12 @@ namespace WRPG.Classes.GameClass.DataClasses
         }
         private void CheckForNewLevel()
         {
-            if(CurrentXp >= XpForNewLevel) { level++; }
+            if(CurrentXp >= XpForNewLevel)
+            {                
+                level++;
+                LevelChanged?.Invoke(level);
+            }
         }
+        public string Info() { return $"Level: {CurrentLevel}"; }
     }
 }

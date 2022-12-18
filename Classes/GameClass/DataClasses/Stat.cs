@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WRPG.Classes.GameClass.DataClasses
@@ -9,28 +10,34 @@ namespace WRPG.Classes.GameClass.DataClasses
     public class Stat
     {
         public string Name { get; set; }
-        private float changeableValue;
-        public float Value { get { return changeableValue; } set { changeableValue = value; } }
-        private float baseValue;
-        public string Source { get; }
-        public Stat(string name, float value, string source)
+        public Dictionary<string,float> Values { private get; init; }
+        [JsonIgnore]
+        public float SumValue { get { return Count(); } }
+        public int Level { get; set; }
+        public float LevelMultipleir { get; set; }
+
+        public Stat(string name, int level, float levelMultipleir)
         {
             Name = name;
-            Value = value;
-            baseValue = value;
-            Source = source;
+            Level = level;
+            LevelMultipleir = levelMultipleir;
         }
-        public void AddValue(float value)
+        public void AddValue(string source, float value)
         {
-            baseValue = Value = value;
+            Values.Add(source, value);
         }
-        public void Reset()
+        float Count()
         {
-            changeableValue = baseValue;
+            float tmp = 0f;
+            foreach (var item in Values)
+            {
+                tmp += item.Value;
+            }
+            return tmp * (this.Level * LevelMultipleir + 1);
         }
-        public string GetInfo()
+        public string Info()
         {
-            return $"Name: {Name}\n\tBase value: {baseValue}\n\tCurrent value: {Value}";
+            return $"Name: {Name} = {SumValue}";
         }
     }
 }

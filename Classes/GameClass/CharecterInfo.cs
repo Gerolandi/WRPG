@@ -57,38 +57,7 @@ namespace WRPG.Classes
             }
         }
 
-        private States hp;
-        public States Hp
-        {
-            get { return (hp); }
-            set
-            {
-                hp = value;
-                OnPropertyChanged("Hp");
-            }
-        }
-
-        private States damage;
-        public States Damage
-        {
-            get { return (damage); }
-            set
-            {
-                damage = value;
-                OnPropertyChanged("Damage");
-            }
-        }
-
-        private States defence;
-        public States Defence
-        {
-            get { return (defence); }
-            set
-            {
-                defence = value;
-                OnPropertyChanged("Defence");
-            }
-        }
+        private States stats;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -96,8 +65,7 @@ namespace WRPG.Classes
         
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
         public CharecterInfo(ref Charecter copy) 
         {
@@ -107,9 +75,7 @@ namespace WRPG.Classes
 
             Level = copy.Level;
 
-            Hp = copy.Hp;
-            Damage = copy.Damage;
-            Defence = copy.Defence;
+            stats = copy.Stats
 
             charecter = copy;
 
@@ -128,13 +94,13 @@ namespace WRPG.Classes
         }
         private string GetAllStat() 
         { 
-            Type type = typeof(Charecter);
+            Type type = typeof(States);
             var tmp = type.GetProperties();
             string output = "";
             foreach ( var prop in tmp )
             {
                 if(prop.PropertyType.Name != "States") continue;
-                output += $"\n   {prop.Name}: {(prop.GetValue(this) as States)!.SumValue}";
+                output += $"\n   {prop.Name}: {(prop.GetValue(this.) as States)!.SumValue}";
             }
             return output;
         }

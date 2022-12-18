@@ -11,47 +11,31 @@ namespace WRPG.Classes.GameClass.DataClasses
 {
     public class States
     {
-        public string Name { get; set; }
-        [JsonIgnore]
-        public float SumValue { get { return ReStat(); } }
-        public int Level { get; set; }
-        public float LevelMultiplier { get; set; }
-        public List<Stat> stats { get; set; }
+        public Dictionary<string,Stat> Stats { private get; init; }
+        public event Action<Stat> StatUpdate;
+        
+        public States() { Stats = new(); }
 
-        private float ReStat()
-        {
-            float tmp = 0;
-            foreach (var i in stats)
-            {
-                tmp += i.Value;
-            }
-            tmp = tmp * (1+(LevelMultiplier * Level));
-            return tmp;
-        }
+        public Stat GetStat(string name) { return Stats[name]; }
 
-        public States(string name,float levelScale,int level)
-        {
-            Name = name;
-            LevelMultiplier = levelScale;
-            this.Level = level;
-            stats = new List<Stat>();
-        }
-        public States() { Name = "None"; stats = new(); }
-        public Stat GetStat(string source) => stats.Find((e) => e.Source == source)!;
         public void AddStat(Stat stat)
         {
-            if (stat.Name != Name) { throw new Exception("Error add stat: Name stat not equals"); }
-            stats.Add(stat);
+            Stats.Add(stat.Name, stat);
+            StatUpdate?.Invoke(stat);
         }
+
+        public void RemoveStat(string name) { Stats.Remove(name); }
+
         public void Update(Stat stat)
         {
-            for (int i = 0; i < stats.Count; i++)
+            Stats[stat.Name] = stat;
+            StatUpdate?.Invoke(stat);
+        }
+        public void LevelUpdate(int level)
+        {
+            foreach(var i in Stats)
             {
-                if (stats[i].Source == stat.Source)
-                {
-                    stats[i] = stat;
-                    break;
-                }
+                i.Value.Level = level;
             }
         }
 

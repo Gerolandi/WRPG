@@ -14,17 +14,14 @@ namespace WRPG.Classes.GameClass
 
         public Level Level { get; init; }
 
-        public States Hp { get; set; }
-        public States Damage { get; set; }
-        public States Defence { get; set; }
+        public States Stats { get; init; }
 
         public Entity(string name)
         {
             this.name = name;
             Level = new(1,0);
-            Hp = new("Hp",0.5f,1);
-            Damage = new("Damage",0.2f,1);
-            Defence = new("Defence",03f,1);
+            Stats = new States();
         }
+        public virtual string Info() { return $"Name: {Name}\n{Level.Info()}"; }
     }
 }

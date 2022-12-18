@@ -18,35 +18,15 @@ namespace WRPG.Classes
         {
             Race = race;
             Class = @class;
-        }
-        public void ReStat()
-        {
-            Type type = this.GetType();
-            foreach (var i in type.GetProperties())
-            {
-                if (i.PropertyType.Name == "States")
-                {
-                    var tmp = (States)i.GetValue(this)!;
-                    tmp.Level = Level.CurrentLevel;
-                }
-            }
+            Level.LevelChanged += Stats.LevelUpdate;
         }
         public Charecter() : base("None") {Race = Class = "None"; }
-        public void AddStat(string name, float value,string source)
-        {
-            Type type = this.GetType();
-            foreach (var i in type.GetProperties())
-            {
-                if (i.Name == name)
-                {
-                    var tmp = (States)i.GetValue(this)!;                    
-                    tmp.AddStat(new Stat(name, value,source));
-                    StatChange!.Invoke(name);
-                }
-            }
-        }
 
-        public string Info() => $"Names: {Name}\nRace: {Race}\nClass: {Class}\nLevel: {Level.CurrentLevel}\nXp: {Level.CurrentXp}\n" +
-                                $"Stats:\n\t{Hp.SumValue}\n\n\t{Damage.SumValue}\n\n\t{Defence.SumValue}";
+  //      public string Info() => $"Names: {Name}\nRace: {Race}\nClass: {Class}\nLevel: {Level.CurrentLevel}\nXp: {Level.CurrentXp}\n" +
+//                                $"Stats:\n\t{Hp.SumValue}\n\n\t{Damage.SumValue}\n\n\t{Defence.SumValue}";
+        public override string Info()
+        {
+            return base.Info();
+        }
     }
 }
