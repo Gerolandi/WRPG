@@ -46,15 +46,15 @@
             </StackPanel.Resources>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="HP: "/>
-                <TextBlock x:Name="hp"/>
+                <TextBlock Text="{Binding Hp, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Damage: "/>
-                <TextBlock x:Name="damage"/>
+                <TextBlock Text="{Binding Damage, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Defence: "/>
-                <TextBlock x:Name="defence"/>
+                <TextBlock Text="{Binding Defence, Mode=OneWay}"/>
             </StackPanel>
         </StackPanel>
         <Button Content="Create" Grid.Column="1" Grid.Row="5" Margin="1" Click="Create_Finish"/>

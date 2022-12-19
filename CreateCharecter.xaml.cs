@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,23 +21,41 @@ namespace WRPG
     /// <summary>
     /// Логика взаимодействия для CreateCharecter.xaml
     /// </summary>
-    public partial class CreateCharecter : Window
+    public partial class CreateCharecter : Window, INotifyPropertyChanged
     {
         public event Action<Charecter> CharecterCreated;
-        States Hp = new("Hp",0f,1);
-        States Damage = new("Damage",0f,1);
-        States Defence = new("Defence",0f,1);
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        States stats= new States();
+        public float Hp { get { return stats.GetStat("Hp").SumValue; } }
+        public float Damage { get { return stats.GetStat("Damage").SumValue; } }
+        public float Defence { get { return stats.GetStat("Defence").SumValue; } }
         public CreateCharecter()
         {
             InitializeComponent();
-            Hp.AddStat(new Stat("Hp", 0, "Race"));
-            Damage.AddStat(new Stat("Damage", 0, "Race"));
-            Defence.AddStat(new Stat("Defence", 0, "Race"));
+            stats.AddStat(new Stat("Hp", 1, 0.2f));
+            stats.AddStat(new Stat("Damage", 1, 0.2f));
+            stats.AddStat(new Stat("Defence", 1, 0.2f));
 
-            Hp.AddStat(new Stat("Hp", 0, "Class"));
-            Damage.AddStat(new Stat("Damage", 0, "Class"));
-            Defence.AddStat(new Stat("Defence", 0, "Class"));
+            stats.GetStat("Hp").AddValue("Race", 0);
+            stats.GetStat("Damage").AddValue("Race", 0);
+            stats.GetStat("Defence").AddValue("Race", 0); 
+
+            stats.GetStat("Hp").AddValue("Class", 0);
+            stats.GetStat("Damage").AddValue("Class", 0);
+            stats.GetStat("Defence").AddValue("Class", 0);
+
+            DataContext = this;
+
+            stats.StatUpdate += Stats_StatUpdate;
+
         }
+
+        private void Stats_StatUpdate(Stat obj)
+        {
+            OnPropertyChanged(obj.Name);
+        }
+
         void Create_Finish(object sender, RoutedEventArgs e)
         {
             if (NameBox.Text == null || RaceBox.SelectedItem == null || ClassBox.SelectedItem == null)
@@ -43,10 +63,7 @@ namespace WRPG
                 MessageBox.Show("Error parametrs");
                 return;
             }
-            Charecter tmp = new(NameBox.Text, RaceBox.Text, ClassBox.Text);
-            tmp.Hp = Hp;
-            tmp.Damage = Damage;
-            tmp.Defence = Defence;
+            Charecter tmp = new(NameBox.Text, RaceBox.Text, ClassBox.Text) { Stats = stats};
             CharecterCreated.Invoke(tmp);
             Close();
         }
@@ -68,19 +85,6 @@ namespace WRPG
                 default: break;
             }
         }
-        void ChangeStat(int hp,int damage,int defence,string source)
-        {
-            Hp.Update(new Stat("Hp", hp,source));
-            Damage.Update(new Stat("Damage", damage,source));
-            Defence.Update(new Stat("Defence", defence,source));
-            UpdateValue();
-        }
-        void UpdateValue()
-        {
-            hp.Text = Hp.SumValue.ToString();
-            damage.Text= Damage.SumValue.ToString();
-            defence.Text= Defence.SumValue.ToString();
-        }
 
         private void ClassBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -98,6 +102,17 @@ namespace WRPG
                     break;
                 default: break;
             }
+        }
+
+        void ChangeStat(int hp, int damage, int defence, string source)
+        {
+            stats.GetStat("Hp").UpdateValue(source, hp);
+            stats.GetStat("Damage").UpdateValue(source, damage);
+            stats.GetStat("Defence").UpdateValue(source, defence);
+        }
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

@@ -24,8 +24,8 @@ namespace WRPG
         {
             InitializeComponent();
             NameBox.Text = entity.Name;
-            HpBar.Maximum = entity.Hp.SumValue;
-            StaminaBar.Maximum = entity.Defence.SumValue;
+            HpBar.Maximum = entity.Stats.GetStat("Hp").SumValue;
+            StaminaBar.Maximum = entity.Stats.GetStat("Defence").SumValue;
         }
     }
 }

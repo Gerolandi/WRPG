@@ -21,7 +21,12 @@ namespace WRPG.Classes.GameClass.DataClasses
         public void AddStat(Stat stat)
         {
             Stats.Add(stat.Name, stat);
-            StatUpdate?.Invoke(stat);
+            stat.StatUpdate += Stat_StatUpdate;
+        }
+
+        private void Stat_StatUpdate(Stat obj)
+        {
+            StatUpdate?.Invoke(obj);
         }
 
         public void RemoveStat(string name) { Stats.Remove(name); }
@@ -29,7 +34,6 @@ namespace WRPG.Classes.GameClass.DataClasses
         public void Update(Stat stat)
         {
             Stats[stat.Name] = stat;
-            StatUpdate?.Invoke(stat);
         }
         public void LevelUpdate(int level)
         {

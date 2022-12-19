@@ -75,7 +75,7 @@ namespace WRPG.Classes
 
             Level = copy.Level;
 
-            stats = copy.Stats
+            stats = copy.Stats;
 
             charecter = copy;
 
@@ -85,24 +85,6 @@ namespace WRPG.Classes
         private void Level_XpValueChanged()
         {
             OnPropertyChanged("Level");
-        }
-
-        public string GetAllInfo()
-        {
-            return $"Name: {Name}\nRace: {Race}\nClass: {Class}\n" +
-                   $"Stats:" + GetAllStat();
-        }
-        private string GetAllStat() 
-        { 
-            Type type = typeof(States);
-            var tmp = type.GetProperties();
-            string output = "";
-            foreach ( var prop in tmp )
-            {
-                if(prop.PropertyType.Name != "States") continue;
-                output += $"\n   {prop.Name}: {(prop.GetValue(this.) as States)!.SumValue}";
-            }
-            return output;
         }
 
     }

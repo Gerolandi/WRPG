@@ -33,7 +33,7 @@ namespace WRPG
                 tmp += i+" "+Level(i).ToString() + "\n";
             }
             //MessageBox.Show($"New level: {lvl.XpForNewLevel}\nPast level: {lvl.XpForPastLevel}");
-            new FightWindow().Show();
+           // new FightWindow().Show();
         }
         private double NextLevel(int level)
         {

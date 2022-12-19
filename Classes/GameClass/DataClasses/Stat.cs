@@ -9,6 +9,8 @@ namespace WRPG.Classes.GameClass.DataClasses
 {
     public class Stat
     {
+        public event Action<Stat> StatUpdate;
+
         public string Name { get; set; }
         public Dictionary<string,float> Values { private get; init; }
         [JsonIgnore]
@@ -21,10 +23,17 @@ namespace WRPG.Classes.GameClass.DataClasses
             Name = name;
             Level = level;
             LevelMultipleir = levelMultipleir;
+            Values = new Dictionary<string,float>();
         }
         public void AddValue(string source, float value)
         {
             Values.Add(source, value);
+            StatUpdate?.Invoke(this);
+        }
+        public void UpdateValue(string source, float value)
+        {
+            Values[source] = value;
+            StatUpdate?.Invoke(this);
         }
         float Count()
         {
